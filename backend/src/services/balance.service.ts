@@ -20,7 +20,7 @@ export async function getBalance(
   spent: boolean
 ): Promise<UTXOresponse> {
   const sqlQuery: string =
-    'SELECT SUM(amount) as amount FROM public.btc_utxo_copy WHERE address = $1 AND spent = $2';
+    'SELECT SUM(amount) as amount FROM public.btc_utxo WHERE address = $1 AND spent = $2';
   const sqlValues: [string, boolean] = [btcAddress, spent];
 
   const utxoRes = await pool.query(sqlQuery, sqlValues);
@@ -45,9 +45,9 @@ export async function getComparison(
   btcAddress: string
 ): Promise<PieChartResponse> {
   const spentSlQuery: string =
-    'SELECT SUM(amount) as amount FROM public.btc_utxo_copy WHERE address = $1 AND spent = $2';
+    'SELECT SUM(amount) as amount FROM public.btc_utxo WHERE address = $1 AND spent = $2';
   const unspentSqlQuery: string =
-    'SELECT SUM(amount) as amount FROM public.btc_utxo_copy WHERE address = $1 AND spent = $2';
+    'SELECT SUM(amount) as amount FROM public.btc_utxo WHERE address = $1 AND spent = $2';
 
   const spentValues: [string, boolean] = [btcAddress, true];
   const unspentValues: [string, boolean] = [btcAddress, false];
@@ -99,7 +99,7 @@ export async function spendBalance(
   // If fullAmount = true, set all rows where spent = false, return updated balance, exit before
   // unnecessary code runs
   if (fullAmount) {
-    const spendAllSqlQuery: string = `UPDATE public.btc_utxo_copy SET spent = $1 WHERE address = $2;`;
+    const spendAllSqlQuery: string = `UPDATE public.btc_utxo SET spent = $1 WHERE address = $2;`;
     const spendAllValues: [boolean, string] = [true, btcAddress];
 
     await pool.query(spendAllSqlQuery, spendAllValues);
@@ -108,7 +108,7 @@ export async function spendBalance(
     //If not, alert user what they have
     // available to spend in btc Address. Return error before unnecessary code is run.
     const unspentSqlQuery: string =
-      'SELECT SUM(amount) as amount FROM public.btc_utxo_copy WHERE address = $1 AND spent = $2';
+      'SELECT SUM(amount) as amount FROM public.btc_utxo WHERE address = $1 AND spent = $2';
     const unspentValues: [string, boolean] = [btcAddress, false];
 
     const unspentRes = await pool.query(unspentSqlQuery, unspentValues);
@@ -126,7 +126,7 @@ export async function spendBalance(
     let i: number = 0;
 
     const getAllSqlQuery: string =
-      'SELECT * FROM public.btc_utxo_copy WHERE address = $1 AND spent = $2 ORDER BY amount';
+      'SELECT * FROM public.btc_utxo WHERE address = $1 AND spent = $2 ORDER BY amount';
     const getAllValues: [string, boolean] = [btcAddress, false];
 
     const getAllRes = await pool.query(getAllSqlQuery, getAllValues);
@@ -146,9 +146,9 @@ export async function spendBalance(
     // Dynamically add ids that need to have spent set to true.
     const sqlConcat: { concat: string; values: string[] } =
       createSpendIdSqlString(spentIds);
-    const spendSqlQuery: string = `UPDATE public.btc_utxo_copy SET spent = $1 WHERE ${sqlConcat.concat}`;
+    const spendSqlQuery: string = `UPDATE public.btc_utxo SET spent = $1 WHERE ${sqlConcat.concat}`;
     const spendSqlValues: (boolean | string)[] = [true, ...sqlConcat.values];
-    const insertSqlQuery: string = `INSERT INTO public.btc_utxo_copy (id, txid, address, amount, spent) VALUES($1, $2, $3, $4, $5)`;
+    const insertSqlQuery: string = `INSERT INTO public.btc_utxo (id, txid, address, amount, spent) VALUES($1, $2, $3, $4, $5)`;
     //setting txid to 'unknown'. I'm sure this links to another theoretical table that I'm not aware of and don't have ids for.
     //but it still spends.
     const insertSqlValues: (boolean | string | number)[] = [

@@ -2,6 +2,49 @@
 
 A challenge for a Back End Engineer position at Salt Lending.
 
+## General Application Notes
+
+### Architecture
+
+A simple react front end with a Node Typescript Express back end and a postgres sql database
+hosted in AWS RDS.
+
+### .env
+
+I know that commiting a .env is bad practice. But for the sake of ease for this challenge,
+the fact that there is no sensitive information involved, and that this isn't a production
+application, I've decided to include the .env in git.
+
+### Certain refactors/breaking out of functions
+
+Certain functions in the back end have been broken out, others have not. Breaking functions
+out for reuse is incredibly helpful for when changes need to be made, however, when trying
+to read on function it can be cumbersome to jump back and forth between functions and files
+to decipher what's going on. I'm a fan of "wet" code (opposite of D.R.Y. get it?). This
+doesn't mean I don't break anything out, but to keep a balance between readability and
+maintainability, my general rule of thumb is that if I have to write something more than
+twice (or believe I will use a certain function more than twice), then I will break it out
+into it's own function and err on the side of maintainability. Hopefully that answers some
+of the structure questions, especially in the balanceService.spend function.
+
+### Use of the balanceService.spend function
+
+The balance service.spend function will mutate and create data (mutation is setting spent
+to true). If you are expecting certain numbers to be returned given the main requirement
+of returning a balance given a BTC Address and spent boolean, know that running the spend
+function or using the spend feature will alter the numbers returned. I have tested this in
+a duplicate copy of the database, so the original data that was sent to me will be intact
+and unchanged upon reaching you.
+
+### Demo Ids
+
+The following id is a good example of a BTC Address with a good mix of spent and unspent
+rows. This id will get you the best result when demoing/testing certain functions:
+
+```
+3L72RKvX1hWbqbzQcogCm4hJbQBDKs3Boi
+```
+
 # Back End
 
 ## Run Locally
@@ -65,35 +108,6 @@ helpers/balanceHelpers.ts
 ```
 
 Models/Types can all be found in the models directory
-
-## Other things to note
-
-### .env
-
-I know that commiting a .env is bad practice. But for the sake of ease for this challenge,
-the fact that there is no sensitive information involved, and that this isn't a production
-application, I've decided to include the .env in git.
-
-### Certain refactors/breaking out of functions
-
-Certain functions in the back end have been broken out, others have not. Breaking functions
-out for reuse is incredibly helpful for when changes need to be made, however, when trying
-to read on function it can be cumbersome to jump back and forth between functions and files
-to decipher what's going on. I'm a fan of "wet" code (opposite of D.R.Y. get it?). This
-doesn't mean I don't break anything out, but to keep a balance between readability and
-maintainability, my general rule of thumb is that if I have to write something more than
-twice (or believe I will use a certain function more than twice), then I will break it out
-into it's own function and err on the side of maintainability. Hopefully that answers some
-of the structure questions, especially in the balanceService.spend function.
-
-### Use of the balanceService.spend function
-
-The balance service.spend function will mutate and create data (mutation is setting spent
-to true). If you are expecting certain numbers to be returned given the main requirement
-of returning a balance given a BTC Address and spent boolean, know that running the spend
-function or using the spend feature will alter the numbers returned. I have tested this in
-a duplicate copy of the database, so the original data that was sent to me will be intact
-and unchanged upon reaching you.
 
 # Front End
 
