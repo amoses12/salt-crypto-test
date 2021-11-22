@@ -8,7 +8,6 @@ import UTXOresponse from '../models/UTXOresponse.interface';
 import BalanceComparison from '../models/balanceComparison.interface';
 import stringToBool from '../helpers/stringToBool';
 import PieChartResponse from '../models/pieChartResponse.interface';
-import { createCipheriv } from 'crypto';
 /**
  * Router Definition
  */

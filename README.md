@@ -134,6 +134,45 @@ script in the front end package.json to:
 "start": "react-scripts --openssl-legacy-provider start"
 ```
 
+## Following Front End Code
+
+### Main App:
+
+```
+App.js
+```
+
+### Main balance page:
+
+```
+pages/balance/index.js
+```
+
+### Components:
+
+Each component has it's own component folder in the /components directory containing
+an index.js and .css file
+
+### Redux:
+
+Store:
+
+```
+store.js
+```
+
+Redux Toolkit Slice:
+
+```
+slices/balanceSlice.js
+```
+
+### Utility functions (API setup)
+
+```
+utils/API.js
+```
+
 ## General Notes
 
 The front end is built on react and uses redux toolkit as well is nivo charts for the

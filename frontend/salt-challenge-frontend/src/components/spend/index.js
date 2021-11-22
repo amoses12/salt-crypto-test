@@ -106,12 +106,14 @@ export const Spend = (props) => {
             </Form.Item>
           </Form>
         </Col>
-        {balanceError !== '' && (
-          <Col md='4'>
+      </Row>
+      {balanceError !== '' && (
+        <Row>
+          <Col md={12}>
             <p className='balanceError'>{balanceError}</p>
           </Col>
-        )}
-      </Row>
+        </Row>
+      )}
     </div>
   );
 };

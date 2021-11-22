@@ -149,6 +149,8 @@ export async function spendBalance(
     const spendSqlQuery: string = `UPDATE public.btc_utxo_copy SET spent = $1 WHERE ${sqlConcat.concat}`;
     const spendSqlValues: (boolean | string)[] = [true, ...sqlConcat.values];
     const insertSqlQuery: string = `INSERT INTO public.btc_utxo_copy (id, txid, address, amount, spent) VALUES($1, $2, $3, $4, $5)`;
+    //setting txid to 'unknown'. I'm sure this links to another theoretical table that I'm not aware of and don't have ids for.
+    //but it still spends.
     const insertSqlValues: (boolean | string | number)[] = [
       newId,
       'unknown',
