@@ -113,7 +113,7 @@ Go to the project directory
   cd frontend/salt-challenge-frontend
 ```
 
-Install dependencies
+Install dependencies (I'm using yarn, but npm should work just fine)
 
 ```bash
   yarn install
@@ -123,6 +123,15 @@ Start the server
 
 ```bash
   yarn start
+```
+
+## Troubleshooting
+
+If you're using npm and having trouble with the start script, try replacing your start
+script in the front end package.json to:
+
+```
+"start": "react-scripts --openssl-legacy-provider start"
 ```
 
 ## General Notes

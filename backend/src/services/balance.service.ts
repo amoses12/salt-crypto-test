@@ -104,7 +104,8 @@ export async function spendBalance(
 
     await pool.query(spendAllSqlQuery, spendAllValues);
   } else {
-    // Check to make sure balance is greater than spendAmount. If not, alert user what they have
+    // Check to make sure balance is greater than spendAmount and that there is something to spend.
+    //If not, alert user what they have
     // available to spend in btc Address. Return error before unnecessary code is run.
     const unspentSqlQuery: string =
       'SELECT SUM(amount) as amount FROM public.btc_utxo_copy WHERE address = $1 AND spent = $2';

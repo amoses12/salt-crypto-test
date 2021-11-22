@@ -29,3 +29,12 @@
 .mainLabel {
   margin-top: 50px;
 }
+
+@media only screen and (min-width: 1466px) {
+  .overlay {
+    font-size: 3vw;
+  }
+  .percentLabel {
+    font-size: 1.5vw;
+  }
+}

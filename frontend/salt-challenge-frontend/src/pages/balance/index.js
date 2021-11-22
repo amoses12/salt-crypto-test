@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setBalance, setBalanceComparison } from '../../slices/balanceSlice';
+import {
+  setBalance,
+  setBalanceComparison,
+  setSpent,
+} from '../../slices/balanceSlice';
 import API from '../../utils/API';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Balance } from '../../components/balance';
@@ -18,11 +22,12 @@ const BalancePage = (props) => {
   const dispatch = useDispatch();
 
   const [showPieChart, setShowPieChart] = useState(false);
+  const [spentChecked, setSpentChecked] = useState(false);
 
   async function checkBalance() {
     const balanceResponse = await API.get(`/balance/${btcAddress}`, {
       params: {
-        spent: spent,
+        spent: spentChecked,
       },
     });
     const balanceComparisonResponse = await API.get(
@@ -30,6 +35,7 @@ const BalancePage = (props) => {
     );
     dispatch(setBalance(balanceResponse.data));
     dispatch(setBalanceComparison(balanceComparisonResponse.data));
+    dispatch(setSpent(spentChecked));
     setShowPieChart(true);
   }
 
@@ -38,11 +44,17 @@ const BalancePage = (props) => {
       <Row className='headerContainer'>
         <Col md={12}>
           <h1 className='balance-header'>Check your Crypto Balance!</h1>
-          <Balance checkBalance={checkBalance} />
         </Col>
       </Row>
       <Row>
-        <Col md={12}>
+        <Col md={6} className='balanceContainer'>
+          <Balance
+            checkBalance={checkBalance}
+            spentChecked={spentChecked}
+            setSpentChecked={setSpentChecked}
+          />
+        </Col>
+        <Col md={6} className='SpendContainer'>
           <Spend setShowPieChart={setShowPieChart} />
         </Col>
       </Row>

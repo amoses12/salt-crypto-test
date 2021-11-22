@@ -46,14 +46,14 @@ export const Spend = (props) => {
   };
 
   return (
-    <div className='balance-container'>
+    <div className='spendContainer'>
       <Row>
         <Col md={12}>
           <h1>Spend</h1>
         </Col>
       </Row>
       <Row>
-        <Col md='5'>
+        <Col md={12}>
           <Form
             name='basic'
             labelCol={{ span: 8 }}

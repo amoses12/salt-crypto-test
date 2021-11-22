@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSpent, setBtcAddress } from '../../slices/balanceSlice';
+import { setBtcAddress } from '../../slices/balanceSlice';
 import { Row, Col } from 'react-bootstrap';
 import { Button, Radio, Input } from 'antd';
 
@@ -8,9 +8,9 @@ import 'antd/dist/antd.css';
 import './balance.css';
 
 export const Balance = (props) => {
-  const balance = useSelector((state) => state.balance.balance);
-  const spent = useSelector((state) => state.balance.spent);
   const btcAddress = useSelector((state) => state.balance.btcAddress);
+
+  const { spentChecked, setSpentChecked } = props;
 
   const dispatch = useDispatch();
 
@@ -29,14 +29,14 @@ export const Balance = (props) => {
   };
 
   return (
-    <div className='balance-container'>
+    <div className='balanceContainer'>
       <Row>
         <Col md={12}>
           <h1>Balance</h1>
         </Col>
       </Row>
       <Row>
-        <Col md='5'>
+        <Col md={8}>
           <Input
             placeholder='Enter Address'
             onChange={(e) => dispatch(setBtcAddress(e.target.value))}
@@ -45,16 +45,18 @@ export const Balance = (props) => {
             <p className='errorStyle'>Please enter a valid BTC Address</p>
           )}
         </Col>
-        <Col md='3'>
+        <Col md={4}>
           <Radio.Group
-            onChange={(e) => dispatch(setSpent(e.target.value))}
-            value={spent}
+            onChange={(e) => setSpentChecked(e.target.value)}
+            value={spentChecked}
           >
             <Radio value={true}>Spent</Radio>
             <Radio value={false}>Unspent</Radio>
           </Radio.Group>
         </Col>
-        <Col md='4'>
+      </Row>
+      <Row className='buttonContainer'>
+        <Col md={12}>
           <Button
             type='primary'
             shape='round'
