@@ -129,5 +129,14 @@ Start the server
 
 The front end is built on react and uses redux toolkit as well is nivo charts for the
 pie chart. The purpose of this was to demonstrate my versatility, but I spent more time on
-the back end since this is for a back end position. By no means is it perfect, but hopefully
+the back end since this is for a back end position. By no means is it perfect or incredibly pretty,
+but it is entirely functional and mostly mobile responsive. Hopefully
 it demonstrates that I can be useful on the front end when needed as well.
+
+# General App Useage
+
+There are 3 features created here. The first is the user can enter a valid btc address (validated)
+and check spent or unspent. The balance will be returned. The 2nd feature is handled by the same
+input as the first, but displays a pie chart showing spent vs unspent balance as well as a percent
+of balance available (unspent). The third is that a user can enter a btc address and choose either
+an amount, or full amount to spend. the balance and pie chart are updated upon spend.
