@@ -1,0 +1,31 @@
+.overlay {
+  position: absolute;
+  top: 105%;
+  right: 10%;
+  bottom: 0;
+  left: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 4vw;
+  color: black;
+  text-align: center;
+  pointer-events: none;
+}
+
+.percentLabel {
+  font-size: 2vw;
+}
+
+.infoContainer {
+  height: 150px;
+}
+
+.pieChartContainer {
+  height: 450px;
+}
+
+.mainLabel {
+  margin-top: 50px;
+}

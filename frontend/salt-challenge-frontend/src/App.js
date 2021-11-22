@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import Balance from '../src/pages/balance';
+import BalancePage from '../src/pages/balance';
 
 function App() {
   return (
     <div className='App'>
-      <Balance />
+      <BalancePage />
     </div>
   );
 }
