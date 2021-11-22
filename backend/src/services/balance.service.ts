@@ -60,6 +60,7 @@ export async function getComparison(
   const total: number = spent + unspent;
   const percentAvailable = (unspent / total) * 100 || 0;
 
+  //format data for nivo pie chart
   return {
     btcAddress: btcAddress,
     percentAvailable: percentAvailable,
@@ -141,7 +142,7 @@ export async function spendBalance(
     }
 
     const newId: string = uuid4();
-
+    // Dynamically add ids that need to have spent set to true.
     const sqlConcat: { concat: string; values: string[] } =
       createSpendIdSqlString(spentIds);
     const spendSqlQuery: string = `UPDATE public.btc_utxo_copy SET spent = $1 WHERE ${sqlConcat.concat}`;

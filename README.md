@@ -2,43 +2,6 @@
 
 A challenge for a Back End Engineer position at Salt Lending.
 
-# Front End
-
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://link-to-project
-```
-
-Start back end first (see below)
-
-Go to the project directory
-
-```bash
-  cd frontend/salt-challenge-frontend
-```
-
-Install dependencies
-
-```bash
-  yarn install
-```
-
-Start the server
-
-```bash
-  yarn start
-```
-
-## General Notes
-
-The front end is built on react and uses redux toolkit as well is nivo charts for the
-pie chart. The purpose of this was to demonstrate my versatility, but I spent more time on
-the back end since this is for a back end position. By no means is it perfect, but hopefully
-it demonstrates that I can be useful on the front end when needed as well.
-
 # Back End
 
 ## Run Locally
@@ -46,7 +9,7 @@ it demonstrates that I can be useful on the front end when needed as well.
 Clone the project (Should already be cloned with front end, same repo)
 
 ```bash
-  git clone https://link-to-project
+  git clone git@github.com:amoses12/salt-crypto-test.git
 ```
 
 Go to the project directory
@@ -93,6 +56,14 @@ Service functions (this is probably of most interest):
 services/balance.service.ts
 ```
 
+There are 2 helper functions in the /helpers directory. balanceHelper has a function
+that may be of interest when it comes to dynamically creating sql queries for the
+balanceService.spend function:
+
+```
+helpers/balanceHelpers.ts
+```
+
 Models/Types can all be found in the models directory
 
 ## Other things to note
@@ -123,3 +94,40 @@ of returning a balance given a BTC Address and spent boolean, know that running 
 function or using the spend feature will alter the numbers returned. I have tested this in
 a duplicate copy of the database, so the original data that was sent to me will be intact
 and unchanged upon reaching you.
+
+# Front End
+
+## Run Locally
+
+Clone the project (should already be cloned from back end)
+
+```bash
+  git clone https://link-to-project
+```
+
+Make sure the back end is running (see above)
+
+Go to the project directory
+
+```bash
+  cd frontend/salt-challenge-frontend
+```
+
+Install dependencies
+
+```bash
+  yarn install
+```
+
+Start the server
+
+```bash
+  yarn start
+```
+
+## General Notes
+
+The front end is built on react and uses redux toolkit as well is nivo charts for the
+pie chart. The purpose of this was to demonstrate my versatility, but I spent more time on
+the back end since this is for a back end position. By no means is it perfect, but hopefully
+it demonstrates that I can be useful on the front end when needed as well.
